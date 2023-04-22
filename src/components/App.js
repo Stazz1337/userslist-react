@@ -31,37 +31,27 @@ function App() {
   }, []);
 
   function handleCardClick(e) {
-    console.log(e)
+    console.log(e);
     setSelectedCard(e);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
-    document.addEventListener("keydown", handleEscClose);
   }
 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
-    setSelectedCard({})
-  }
-
-  function handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      closeAllPopups();
-    }
+    setSelectedCard({});
   }
 
   function handleOuterClick(evt) {
@@ -184,8 +174,11 @@ function App() {
         }
       />
 
-      <ImagePopup card ={selectedCard} onClose={closeAllPopups} onOuterClick={handleOuterClick}/>
-
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+        onOuterClick={handleOuterClick}
+      />
     </div>
   );
 }

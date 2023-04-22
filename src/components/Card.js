@@ -8,7 +8,7 @@ function Card(props) {
   return (
     <li className="place__item-wrapper" onClick={handleClick}>
       <figure className="place__item">
-        <img src={props.card.link} alt="" className="place__image" />
+        <img src={props.card.link} alt={props.card.name} className="place__image" />
         <button
           className="place__delete link"
           type="button"
