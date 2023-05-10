@@ -1,12 +1,16 @@
 import Card from "./Card";
+import { useContext } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Main(props) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-wrapper">
           <img
-            src={props.userAvatar}
+            src={currentUser.avatar}
             alt="аватар пользователя"
             className="profile__avatar"
           />
@@ -19,7 +23,7 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__wrapper">
-            <h1 className="profile__title">{props.userName}</h1>
+            <h1 className="profile__title">{currentUser.name}</h1>
             <button
               className="profile__edit-button link"
               type="button"
@@ -27,7 +31,7 @@ function Main(props) {
               onClick={props.onEditProfile}
             />
           </div>
-          <p className="profile__subtitle">{props.userDescription}</p>
+          <p className="profile__subtitle">{currentUser.about}</p>
         </div>
         <button
           className="profile__add-button link"
@@ -39,7 +43,13 @@ function Main(props) {
       <section className="places" aria-label="карточки мест">
         <ul className="place">
           {props.cards.map((card) => (
-            <Card card={card} key={card._id} onCardClick={props.onCardClick} />
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={props.onCardClick}
+              onCardLike={props.handleCardLike}
+              onCardDelete={props.handleCardDelete}
+            />
           ))}
         </ul>
       </section>

@@ -50,7 +50,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  putCardLike(cardId) {
+  /*putCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
@@ -68,6 +68,27 @@ class Api {
         card: cardId,
       }),
     }).then(this._checkResponse);
+  }*/
+
+  changeLikeCardStatus(cardId, notLiked) {
+    if (notLiked) {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+        body: JSON.stringify({
+          card: cardId,
+        }),
+      }).then(this._checkResponse);
+    }
+    else {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+        body: JSON.stringify({
+          card: cardId,
+        }),
+      }).then(this._checkResponse);
+    }
   }
 
   deleteCard(cardId) {

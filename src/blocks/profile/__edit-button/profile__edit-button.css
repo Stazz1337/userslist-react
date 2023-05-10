@@ -7,7 +7,7 @@
   border: 0;
   line-height: 48px;
   background-image: url(../../../images/profile-edit-button.svg);
-  
+  outline: none;
 }
 
 @media (max-width:640px) {
