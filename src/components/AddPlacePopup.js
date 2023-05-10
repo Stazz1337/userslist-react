@@ -1,5 +1,5 @@
 import PopupWithForm from "./PopupWithForm";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 function AddPlacePopup(props) {
   const cardNameRef = useRef();
@@ -7,13 +7,19 @@ function AddPlacePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    //console.log(cardNameRef.current.value)
 
     props.onAddPlace({
       name: cardNameRef.current.value,
       link: cardLinkRef.current.value,
     });
   }
+
+  useEffect(() => {
+    if (!props.isOpen) {
+      cardNameRef.current.value = "";
+      cardLinkRef.current.value = "";
+    }
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm

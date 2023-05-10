@@ -1,12 +1,3 @@
-export const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button:disabled',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'popup__input-error_active'
-};
-
 export const popupImage = document.querySelector('.popup_type_image');
 export const popupAddCardOpenButton = document.querySelector('.profile__add-button');
 export const popupAddCard = document.querySelector('.popup_type_add-card');

@@ -12,7 +12,6 @@ import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  console.log(currentUser);
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
@@ -37,7 +36,6 @@ function App() {
   }, []);
 
   function handleCardClick(e) {
-    console.log(e);
     setSelectedCard(e);
   }
 
@@ -117,7 +115,6 @@ function App() {
       .setAvatar(value)
       .then((res) => {
         setCurrentUser(res);
-        //console.log(res);
         closeAllPopups();
       })
       .catch((err) => {
