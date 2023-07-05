@@ -9,6 +9,43 @@
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
-  background-color: #000000;
-  position: relative;
+  background-color: #d9f5ff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header__logo {
+  object-fit: cover;
+  padding: 0;
+  height: 100px;
+  width: 100px;
+}
+
+.main__posts {
+  margin: 20px 55px 0px 55px;
+  border: 1px solid black;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 20px 0px 50px;
+  margin: 0;
+}
+
+.page-number {
+  cursor: pointer;
+}
+
+.previous {
+  cursor: pointer;
+}
+
+.next {
+  cursor: pointer;
 }

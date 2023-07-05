@@ -1,11 +1,20 @@
-import logo from "../images/header-logo.svg";
+import logo from '../images/posts.svg';
+import Watch from './Watch';
 
-function Header() {
+const Header = ({ onLanguageChange}) => {
+  
   return (
-    <header className="header">
-      <img src={logo} alt="Место Россия" className="header__logo" />
+    <header className='header'>
+      <img className='header__logo' src={logo} alt='Logo' />
+      
+      <Watch/>
+      <select  className="header__lang" onChange={onLanguageChange}>
+        <option value='ru'>RU</option>
+        <option value='en'>EN</option>
+      </select>
+      
     </header>
   );
-}
+};
 
 export default Header;

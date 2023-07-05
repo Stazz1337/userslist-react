@@ -1,28 +1,5 @@
-# Mesto-React
-
-## Описание
-
-Учебный React-проект с реализацией базового функционала Instagram, с возможностью редактирования профиля, добавления фотографий с сервера и пользовательских с возможностю удаления, а также с возможностью ставить и удалять лайки фотографиям.
-
-## Технологии
-
-- Javascript
-- React
-- ООП
-- JSON API
-- Webpack
-- HTML
-- CSS
-- Flex
-- Grid
-- БЭМ
-- Figma
-- Адаптивная верстка
+# Posts-React
 
 ## Доступ к проекту
 
-По ссылке https://Stazz1337.github.io/mesto-react/index.html или git clone
-
-## Статус проекта
-
-В процессе разработки
+По ссылке https://Stazz1337.github.io/posts-react/index.html или git clone

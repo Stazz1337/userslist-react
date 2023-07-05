@@ -1,60 +1,49 @@
-import Card from "./Card";
-import { useContext } from "react";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useState } from 'react';
+import ReactPaginate from 'react-paginate';
+import reviewsData from '../utils/data.json';
 
-function Main(props) {
-  const currentUser = useContext(CurrentUserContext);
+const Main = ({ selectedLanguage }) => {
+  const reviews = reviewsData[selectedLanguage];
+  const [currentPage, setCurrentPage] = useState(0);
+  const reviewsPerPage = 10;
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const indexOfLastReview = (currentPage + 1) * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = Object.keys(reviews)
+    .slice(indexOfFirstReview, indexOfLastReview)
+    .map((clientId) => (
+      <section className= "main__posts" key={clientId}>
+        <div>
+          {reviews[clientId].name.split(' ')[0] +
+            ' ' + 
+            ((reviews[clientId].name.split(' ')[1] &&
+              reviews[clientId].name.split(' ')[1][0] + ".") || '')}
+        </div>
+        <div>{reviews[clientId].review}</div>
+        <div>{reviews[clientId].date}</div>
+      </section>
+    ));
 
   return (
-    <main className="content">
-      <section className="profile">
-        <div className="profile__avatar-wrapper">
-          <img
-            src={currentUser.avatar}
-            alt="аватар пользователя"
-            className="profile__avatar"
-          />
-          <button
-            className="profile__avatar-edit-button link"
-            type="button"
-            aria-label="редактировать аватар"
-            onClick={props.onEditAvatar}
-          />
-        </div>
-        <div className="profile__info">
-          <div className="profile__wrapper">
-            <h1 className="profile__title">{currentUser.name}</h1>
-            <button
-              className="profile__edit-button link"
-              type="button"
-              aria-label="редактировать"
-              onClick={props.onEditProfile}
-            />
-          </div>
-          <p className="profile__subtitle">{currentUser.about}</p>
-        </div>
-        <button
-          className="profile__add-button link"
-          type="button"
-          aria-label="добавить"
-          onClick={props.onAddPlace}
-        />
-      </section>
-      <section className="places" aria-label="карточки мест">
-        <ul className="place">
-          {props.cards.map((card) => (
-            <Card
-              card={card}
-              key={card._id}
-              onCardClick={props.onCardClick}
-              onCardLike={props.handleCardLike}
-              onCardDelete={props.handleCardDelete}
-            />
-          ))}
-        </ul>
-      </section>
-    </main>
+    <div className='main'>
+      {currentReviews}
+      <ReactPaginate
+        pageCount={Math.ceil(Object.keys(reviews).length / reviewsPerPage)}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={2}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        pageClassName={'page-number'}
+        activeClassName={'active'}
+        previousLabel={'Previous'}
+        nextLabel={'Next'}
+      />
+    </div>
   );
-}
+};
 
 export default Main;
