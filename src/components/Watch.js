@@ -1,4 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+class Watch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentTime: new Date().toLocaleTimeString(),
+    };
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.setState({ currentTime: new Date().toLocaleTimeString() });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    const { currentTime } = this.state;
+
+    return (
+      <div className='watch' style={{ color: 'orange' }}>
+        {currentTime}
+      </div>
+    );
+  }
+}
+
+export default Watch;
+
+/*import React, { useState, useEffect } from 'react';
 
 const Watch = () => {
   const [currentTime, setCurrentTime] = useState(
@@ -22,4 +55,4 @@ const Watch = () => {
   );
 };
 
-export default Watch;
+export default Watch;*/
