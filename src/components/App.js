@@ -1,54 +1,28 @@
-import React, { Component } from 'react';
-import Header from './Header';
-import Main from './Main';
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedLanguage: 'ru',
-    };
-  }
-
-  handleLanguageChange = (event) => {
-    this.setState({ selectedLanguage: event.target.value });
-  };
-
-  render() {
-    const { selectedLanguage } = this.state;
-
-    return (
-      <div className='wrapper'>
-        <Header onLanguageChange={this.handleLanguageChange} />
-        <Main selectedLanguage={selectedLanguage} />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/*import Header from './Header';
+import Users from './Users';
 import Main from './Main';
 import { useState } from 'react';
-
-
+import usersData from '../utils/generated2.json';
 
 function App() {
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const [selectedLanguage, setSelectedLanguage] = useState('ru');
-
-
-  const handleLanguageChange = (event) => {
-    setSelectedLanguage(event.target.value);
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
   };
 
   return (
     <div className='wrapper'>
-      <Header onLanguageChange={handleLanguageChange} />
-      <Main selectedLanguage={selectedLanguage}  />
+      <Users handleUserClick={handleUserClick} usersData={usersData} />
+      {selectedUser && (
+        <Main
+          user={selectedUser}
+          setSelectedUser={setSelectedUser}
+          index={usersData.indexOf(selectedUser)}
+          usersData={usersData}
+        />
+      )}
     </div>
   );
 }
 
-export default App;*/
+export default App;

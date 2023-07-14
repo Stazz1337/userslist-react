@@ -1,118 +1,88 @@
-import React from 'react';
-import ReactPaginate from 'react-paginate';
-import reviewsData from '../utils/data.json';
+import userPic from '../images/user-hands-svgrepo-com.svg';
+import { useState } from 'react';
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 0,
-    };
-    this.reviews = reviewsData[this.props.selectedLanguage];
-    this.reviewsPerPage = 10;
-  }
-
-  handlePageChange = ({ selected }) => {
-    this.setState({ currentPage: selected });
+const Main = ({ user, index, setSelectedUser }) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedLanguage !== this.props.selectedLanguage) {
-      this.reviews = reviewsData[this.props.selectedLanguage];
-      this.setState({ currentPage: 0 });
-    }
-  }
+  const [message, setMessage] = useState('');
 
-  render() {
-    const currentPage = this.state.currentPage;
-    const reviews = this.reviews;
-    const reviewsPerPage = this.reviewsPerPage;
-
-    const indexOfLastReview = (currentPage + 1) * reviewsPerPage;
-    const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-    const currentReviews = Object.keys(reviews)
-      .slice(indexOfFirstReview, indexOfLastReview)
-      .map((clientId) => (
-        <section className='main__posts' key={clientId}>
-          <div>
-            {reviews[clientId].name.split(' ')[0] +
-              ' ' +
-              ((reviews[clientId].name.split(' ')[1] &&
-                reviews[clientId].name.split(' ')[1][0] + '.') ||
-                '')}
-          </div>
-          <div>{reviews[clientId].review}</div>
-          <div>{reviews[clientId].date}</div>
-        </section>
-      ));
-
-    return (
-      <div className='main'>
-        {currentReviews}
-        <ReactPaginate
-          pageCount={Math.ceil(Object.keys(reviews).length / reviewsPerPage)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          onPageChange={this.handlePageChange}
-          containerClassName={'pagination'}
-          pageClassName={'page-number'}
-          activeClassName={'active'}
-          previousLabel={'Previous'}
-          nextLabel={'Next'}
-        />
-      </div>
-    );
-  }
-}
-
-export default Main;
-
-/*import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import reviewsData from '../utils/data.json';
-
-const Main = ({ selectedLanguage }) => {
-  const reviews = reviewsData[selectedLanguage];
-  const [currentPage, setCurrentPage] = useState(0);
-  const reviewsPerPage = 10;
-
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected);
+  const handleSave = () => {
+    setMessage('Пользователь сохранен');
+    setTimeout(() => {
+      setMessage('');
+    }, 1000);
   };
-
-  const indexOfLastReview = (currentPage + 1) * reviewsPerPage;
-  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = Object.keys(reviews)
-    .slice(indexOfFirstReview, indexOfLastReview)
-    .map((clientId) => (
-      <section className= "main__posts" key={clientId}>
-        <div>
-          {reviews[clientId].name.split(' ')[0] +
-            ' ' + 
-            ((reviews[clientId].name.split(' ')[1] &&
-              reviews[clientId].name.split(' ')[1][0] + ".") || '')}
-        </div>
-        <div>{reviews[clientId].review}</div>
-        <div>{reviews[clientId].date}</div>
-      </section>
-    ));
 
   return (
     <div className='main'>
-      {currentReviews}
-      <ReactPaginate
-        pageCount={Math.ceil(Object.keys(reviews).length / reviewsPerPage)}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={2}
-        onPageChange={handlePageChange}
-        containerClassName={'pagination'}
-        pageClassName={'page-number'}
-        activeClassName={'active'}
-        previousLabel={'Previous'}
-        nextLabel={'Next'}
-      />
+      <p className='main__list-header'>Пользователь {index + 1} </p>
+
+      <div className='main__list-wrapper'>
+        <img src={userPic} alt='user-icon' className='main__icon'></img>
+        <ul className='main__list'>
+          <li className='main__list-item'>
+            <label className='main__list-label'>
+              Имя
+              <input
+                type='text'
+                name='firstName'
+                value={user.firstName}
+                onChange={handleInputChange}
+                className='main__list-input'
+              />
+            </label>
+          </li>
+          <li className='main__list-item'>
+            <label className='main__list-label'>
+              Фамилия
+              <input
+                type='text'
+                name='lastName'
+                value={user.lastName}
+                onChange={handleInputChange}
+                className='main__list-input'
+              />
+            </label>
+          </li>
+          <li className='main__list-item'>
+            <label className='main__list-label'>
+              Возраст
+              <input
+                type='number'
+                name='age'
+                value={user.age}
+                onChange={handleInputChange}
+                className='main__list-input'
+              />
+            </label>
+          </li>
+          <li className='main__list-item'>
+            <label className='main__list-label'>
+              Email
+              <input
+                type='email'
+                name='email'
+                value={user.email}
+                onChange={handleInputChange}
+                className='main__list-input'
+              />
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <button onClick={handleSave} className='main__save-button'>
+        Сохранить
+      </button>
+      <p className='main__info'>{message}</p>
     </div>
   );
 };
 
-export default Main;*/
+export default Main;
