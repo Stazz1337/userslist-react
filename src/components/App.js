@@ -1,7 +1,7 @@
 import Users from './Users';
 import Main from './Main';
 import { useState } from 'react';
-import usersData from '../utils/generated2.json';
+import usersData from '../utils/generated.json';
 
 function App() {
   const [selectedUser, setSelectedUser] = useState(null);

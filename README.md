@@ -6,4 +6,4 @@
 
 ## Доступ к проекту
 
-git clone
+По ссылке https://stazz1337.github.io/userslist-react/ или git clone
